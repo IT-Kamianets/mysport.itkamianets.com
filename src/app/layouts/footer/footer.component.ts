@@ -23,6 +23,14 @@ export class FooterComponent {
 			label: 'Landing',
 			path: '/',
 		},
+		{
+			label: 'Login',
+			path: '/login',
+		},
+		{
+			label: 'Profile',
+			path: '/profile',
+		},
 	]);
 	protected readonly companyImage = computed(() => this.company().image || 'logo.png');
 	protected readonly companyImageAlt = computed(() =>
