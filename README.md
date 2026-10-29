@@ -389,7 +389,7 @@ dist/app/browser
 Custom domain which you should adjust to your own domain so it works properly, any subdomain of `*.itkamianets.com` in case it's not used before on our github org.
 
 ```
-ngx.itkamianets.com
+mysport.itkamianets.com
 ```
 
 Configured via:
