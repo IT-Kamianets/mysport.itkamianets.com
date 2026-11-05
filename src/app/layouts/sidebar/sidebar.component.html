@@ -38,34 +38,54 @@
 		}
 	</ul>
 
-	<!-- Bottom controls -->
-	<div class="flex flex-col items-center gap-2 self-stretch lg:items-stretch">
-		<!-- Language toggle -->
-		<button
-			type="button"
-			class="theme-interactive theme-focus flex h-10 items-center justify-center gap-2 rounded-[var(--radius-btn)] px-2 text-sm font-medium transition-all hover:bg-[var(--c-bg-tertiary)] lg:justify-start lg:px-3"
-			style="color: var(--c-text-muted)"
-			(click)="nextLanguage()"
+	<!-- Bottom: Profile photo & link -->
+	<div class="border-t-2 border-[var(--c-border)] pt-3 self-stretch">
+		<a
+			[routerLink]="authService.currentUser() ? '/profile' : '/login'"
+			class="theme-interactive group flex items-center justify-center gap-3 rounded-[var(--radius-btn)] p-1.5 transition-all hover:bg-[var(--c-bg-tertiary)] lg:justify-start lg:px-2"
+			[title]="authService.currentUser()?.displayName || 'Профіль'"
 		>
-			<img
-				class="h-5 w-7 shrink-0 rounded-[4px] border border-black/10 object-cover"
-				[alt]="currentLanguage().nativeName"
-				[ngSrc]="currentLanguage().flagSrc"
-				width="28"
-				height="20"
-			/>
-			<span class="hidden lg:block">{{ currentLanguage().nativeName }}</span>
-		</button>
+			<!-- Profile photo avatar -->
+			<div
+				class="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-[var(--c-primary)] shadow-sm"
+				style="background: var(--c-bg-tertiary)"
+			>
+				@if (authService.currentUser()?.photoURL; as photo) {
+					<img
+						[src]="photo"
+						alt="Profile"
+						class="h-full w-full object-cover"
+						referrerpolicy="no-referrer"
+					/>
+				} @else {
+					<span class="material-symbols-outlined text-[24px]" style="color: var(--c-primary)">person</span>
+				}
+				@if (authService.currentUser()) {
+					<span
+						class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-[var(--c-bg-secondary)]"
+						style="background: #22c55e"
+					></span>
+				}
+			</div>
 
-		<!-- Theme toggle -->
-		<button
-			type="button"
-			class="theme-interactive theme-focus flex h-10 items-center justify-center gap-2 rounded-[var(--radius-btn)] px-2 text-sm font-medium transition-all hover:bg-[var(--c-bg-tertiary)] lg:justify-start lg:px-3"
-			style="color: var(--c-text-muted)"
-			(click)="toggleMode()"
-		>
-			<span class="material-symbols-outlined shrink-0 text-[22px]">{{ toggleIcon() }}</span>
-			<span class="hidden lg:block">{{ mode() === 'dark' ? 'Світла' : 'Темна' }}</span>
-		</button>
+			<!-- User details (expanded sidebar) -->
+			<div class="hidden min-w-0 flex-1 lg:block">
+				@if (authService.currentUser(); as user) {
+					<p class="truncate text-xs font-bold leading-tight" style="color: var(--c-text-strong)">
+						{{ user.displayName || 'Користувач' }}
+					</p>
+					<p class="truncate text-[11px] leading-tight" style="color: var(--c-text-muted)">
+						{{ user.email }}
+					</p>
+				} @else {
+					<p class="text-xs font-bold leading-tight" style="color: var(--c-primary)">
+						Увійти
+					</p>
+					<p class="text-[11px] leading-tight" style="color: var(--c-text-muted)">
+						Через Google
+					</p>
+				}
+			</div>
+		</a>
 	</div>
 </nav>

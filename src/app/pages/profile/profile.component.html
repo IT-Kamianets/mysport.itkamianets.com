@@ -1,7 +1,7 @@
 <div class="min-h-screen" style="background: var(--c-bg-primary)">
 	<div class="mx-auto max-w-[var(--container)] px-4 py-14 sm:px-6">
 
-		<!-- Profile header -->
+		<!-- Profile header card -->
 		<div
 			class="relative overflow-hidden rounded-[calc(var(--radius-card)*2)] border-2 border-[var(--c-border)] p-8 shadow-[var(--shadow-md)] sm:p-10"
 			style="background: var(--c-bg-secondary)"
@@ -14,32 +14,76 @@
 				style="background: var(--c-primary)"
 			></div>
 
-			<div class="relative flex flex-wrap items-center gap-6">
-				<!-- Avatar -->
-				<div
-					class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-4 border-[var(--c-primary)] text-3xl font-black text-white"
-					style="background: var(--c-primary); box-shadow: 0 0 24px color-mix(in srgb, var(--c-primary) 60%, transparent)"
-				>
-					U
+			<div class="relative flex flex-wrap items-center justify-between gap-6">
+				<div class="flex flex-wrap items-center gap-6">
+					<!-- Avatar -->
+					<div
+						class="relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-[var(--c-primary)] shadow-lg"
+						style="background: var(--c-bg-tertiary)"
+					>
+						@if (authService.currentUser()?.photoURL; as photo) {
+							<img
+								[src]="photo"
+								alt="Avatar"
+								class="h-full w-full object-cover"
+								referrerpolicy="no-referrer"
+							/>
+						} @else {
+							<span class="material-symbols-outlined text-[44px]" style="color: var(--c-primary)">person</span>
+						}
+					</div>
+
+					<div>
+						<div
+							class="inline-flex items-center gap-2 rounded-full border-2 border-[var(--c-border)] bg-[var(--c-bg-tertiary)] px-3 py-1 text-xs font-bold tracking-widest uppercase"
+							style="color: var(--c-primary)"
+						>
+							<span
+								class="h-2 w-2 rounded-full"
+								style="background: var(--c-primary); box-shadow: 0 0 6px var(--c-neon)"
+							></span>
+							Профіль
+						</div>
+
+						@if (authService.currentUser(); as user) {
+							<h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
+								{{ user.displayName || 'Користувач' }}
+							</h1>
+							<p class="mt-1 text-sm font-medium" style="color: var(--c-text-muted)">
+								{{ user.email }}
+							</p>
+						} @else {
+							<h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
+								Гість
+							</h1>
+							<p class="mt-1 text-sm font-medium" style="color: var(--c-text-muted)">
+								Авторизуйтесь через Google, щоб зберігати свій прогрес
+							</p>
+						}
+					</div>
 				</div>
 
-				<div>
-					<div
-						class="inline-flex items-center gap-2 rounded-full border-2 border-[var(--c-border)] bg-[var(--c-bg-tertiary)] px-3 py-1 text-xs font-bold tracking-widest uppercase"
-						style="color: var(--c-primary)"
-					>
-						<span
-							class="h-2 w-2 rounded-full"
-							style="background: var(--c-primary); box-shadow: 0 0 6px var(--c-neon)"
-						></span>
-						Профіль
-					</div>
-					<h1 class="mt-2 text-3xl font-black tracking-tight" style="color: var(--c-text-strong)">
-						Особистий кабінет
-					</h1>
-					<p class="mt-1 text-sm" style="color: var(--c-text-muted)">
-						Тут відображається інформація про користувача
-					</p>
+				<div class="flex items-center gap-3">
+					@if (authService.currentUser()) {
+						<button
+							type="button"
+							(click)="authService.signOut()"
+							class="theme-interactive theme-focus inline-flex h-11 items-center gap-2 rounded-[var(--radius-btn)] border-2 border-[var(--c-border)] px-6 text-sm font-bold transition-all hover:bg-[var(--c-bg-tertiary)]"
+							style="color: var(--c-text-strong)"
+						>
+							<span class="material-symbols-outlined text-[18px]">logout</span>
+							Вийти
+						</button>
+					} @else {
+						<a
+							routerLink="/login"
+							class="theme-interactive theme-focus inline-flex h-11 items-center gap-2 rounded-[var(--radius-btn)] px-6 text-sm font-bold text-white shadow-md"
+							style="background: var(--c-primary)"
+						>
+							<span class="material-symbols-outlined text-[18px]">login</span>
+							Увійти через Google
+						</a>
+					}
 				</div>
 			</div>
 		</div>

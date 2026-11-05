@@ -1,5 +1,5 @@
 <div
-	class="flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-16"
+	class="flex min-h-[calc(100vh-2rem)] items-center justify-center px-4 py-16"
 	style="background: var(--c-bg-primary)"
 >
 	<!-- glow behind card -->
@@ -9,7 +9,7 @@
 	></div>
 
 	<div
-		class="relative w-full max-w-md overflow-hidden rounded-[calc(var(--radius-card)*2)] border-2 border-[var(--c-border)] p-8 shadow-[var(--shadow-md)]"
+		class="relative w-full max-w-md overflow-hidden rounded-[calc(var(--radius-card)*2)] border-2 border-[var(--c-border)] p-8 text-center shadow-[var(--shadow-md)] sm:p-10"
 		style="background: var(--c-bg-secondary)"
 	>
 		<!-- top accent bar -->
@@ -27,54 +27,92 @@
 		</div>
 
 		<h1 class="mt-5 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
-			Вхід до кабінету
+			Вхід до MySport
 		</h1>
 		<p class="mt-2 text-sm" style="color: var(--c-text-muted)">
-			Увійди, щоб продовжити тренування
+			Швидкий і безпечний вхід в один клік
 		</p>
 
-		<div class="mt-8 flex flex-col gap-4">
-			<div class="flex flex-col gap-1">
-				<label class="text-xs font-semibold uppercase tracking-widest" style="color: var(--c-text-muted)">
-					Email
-				</label>
-				<input
-					type="email"
-					placeholder="you@example.com"
-					class="h-11 rounded-[var(--radius)] border-2 border-[var(--c-border)] bg-[var(--c-bg-primary)] px-4 text-sm outline-none transition-all focus:border-[var(--c-primary)] focus:shadow-[var(--focus-ring)]"
-					style="color: var(--c-text); caret-color: var(--c-primary)"
-				/>
-			</div>
-
-			<div class="flex flex-col gap-1">
-				<label class="text-xs font-semibold uppercase tracking-widest" style="color: var(--c-text-muted)">
-					Пароль
-				</label>
-				<input
-					type="password"
-					placeholder="••••••••"
-					class="h-11 rounded-[var(--radius)] border-2 border-[var(--c-border)] bg-[var(--c-bg-primary)] px-4 text-sm outline-none transition-all focus:border-[var(--c-primary)] focus:shadow-[var(--focus-ring)]"
-					style="color: var(--c-text); caret-color: var(--c-primary)"
-				/>
-			</div>
-
-			<button
-				type="button"
-				class="theme-interactive theme-focus mt-2 flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-btn)] text-sm font-bold text-white shadow-[var(--shadow-md)] transition-all"
-				style="background: var(--c-primary); box-shadow: 0 4px 20px color-mix(in srgb, var(--c-primary) 55%, transparent)"
+		@if (authService.currentUser(); as user) {
+			<!-- Already logged in view -->
+			<div
+				class="mt-8 rounded-[var(--radius-card)] border-2 border-[var(--c-border)] p-6"
+				style="background: var(--c-bg-primary)"
 			>
-				Увійти
-				<span class="material-symbols-outlined text-[18px]">login</span>
-			</button>
+				<div class="flex flex-col items-center gap-3">
+					<div
+						class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-[var(--c-primary)] shadow-sm"
+						style="background: var(--c-bg-tertiary)"
+					>
+						@if (user.photoURL) {
+							<img [src]="user.photoURL" alt="Avatar" class="h-full w-full object-cover" referrerpolicy="no-referrer" />
+						} @else {
+							<span class="material-symbols-outlined text-[32px]" style="color: var(--c-primary)">person</span>
+						}
+					</div>
 
-			<p class="text-center text-xs" style="color: var(--c-text-muted)">
-				Немає акаунту?
-				<a
-					class="font-semibold underline-offset-2 hover:underline"
-					style="color: var(--c-primary)"
-					href="#"
-				>Зареєструватися</a>
-			</p>
-		</div>
+					<div>
+						<p class="font-bold" style="color: var(--c-text-strong)">{{ user.displayName || 'Користувач' }}</p>
+						<p class="text-xs" style="color: var(--c-text-muted)">{{ user.email }}</p>
+					</div>
+
+					<a
+						routerLink="/profile"
+						class="theme-interactive theme-focus mt-2 inline-flex h-11 w-full items-center justify-center gap-2 rounded-[var(--radius-btn)] text-sm font-bold text-white shadow-sm"
+						style="background: var(--c-primary)"
+					>
+						Перейти в профіль
+						<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+					</a>
+				</div>
+			</div>
+		} @else {
+			<!-- Google Sign In Button -->
+			<div class="mt-8">
+				<button
+					type="button"
+					(click)="handleGoogleSignIn()"
+					[disabled]="isSigningIn()"
+					class="theme-interactive theme-focus flex h-14 w-full items-center justify-center gap-3 rounded-[var(--radius-btn)] border-2 border-[var(--c-border)] px-6 text-base font-bold shadow-[var(--shadow-sm)] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+					style="background: var(--c-bg-primary); color: var(--c-text-strong)"
+				>
+					@if (isSigningIn()) {
+						<span class="inline-block h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent"></span>
+						<span>Входимо...</span>
+					} @else {
+						<!-- Google colorful 'G' SVG icon -->
+						<svg class="h-6 w-6 shrink-0" viewBox="0 0 24 24">
+							<path
+								fill="#4285F4"
+								d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+							/>
+							<path
+								fill="#34A853"
+								d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+							/>
+							<path
+								fill="#FBBC05"
+								d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+							/>
+							<path
+								fill="#EA4335"
+								d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+							/>
+						</svg>
+						<span>Увійти через Google</span>
+					}
+				</button>
+
+				@if (authService.error(); as err) {
+					<p class="mt-4 rounded-lg bg-red-500/10 p-3 text-xs font-semibold text-red-500">
+						{{ err }}
+					</p>
+				}
+
+				<p class="mt-6 text-xs leading-relaxed" style="color: var(--c-text-muted)">
+					Натискаючи «Увійти через Google», ви погоджуєтеся з умовами використання платформи MySport.
+				</p>
+			</div>
+		}
 	</div>
 </div>
