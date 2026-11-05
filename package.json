@@ -3,7 +3,8 @@
 	"version": "22.0.1",
 	"scripts": {
 		"start": "ng serve",
-		"build": "ng build --configuration=production && node tools/seo/generate-static-seo.mjs"
+		"build": "ng build --configuration=production && node tools/seo/generate-static-seo.mjs",
+		"deploy:firebase": "npm run build && npx firebase-tools deploy --only hosting"
 	},
 	"dependencies": {
 		"@angular/common": "22.2.1",

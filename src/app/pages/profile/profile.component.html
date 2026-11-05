@@ -1,6 +1,18 @@
 <div class="min-h-screen" style="background: var(--c-bg-primary)">
 	<div class="mx-auto max-w-[var(--container)] px-4 py-14 sm:px-6">
 
+		<!-- Feedback messages -->
+		@if (authService.successMessage(); as msg) {
+			<div class="mb-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm font-semibold text-emerald-500 shadow-sm">
+				{{ msg }}
+			</div>
+		}
+		@if (authService.error(); as err) {
+			<div class="mb-6 rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm font-semibold text-red-500 shadow-sm">
+				{{ err }}
+			</div>
+		}
+
 		<!-- Profile header card -->
 		<div
 			class="relative overflow-hidden rounded-[calc(var(--radius-card)*2)] border-2 border-[var(--c-border)] p-8 shadow-[var(--shadow-md)] sm:p-10"
@@ -28,6 +40,8 @@
 								class="h-full w-full object-cover"
 								referrerpolicy="no-referrer"
 							/>
+						} @else if (authService.isAnonymous()) {
+							<span class="material-symbols-outlined text-[44px]" style="color: var(--c-primary)">visibility_off</span>
 						} @else {
 							<span class="material-symbols-outlined text-[44px]" style="color: var(--c-primary)">person</span>
 						}
@@ -42,29 +56,71 @@
 								class="h-2 w-2 rounded-full"
 								style="background: var(--c-primary); box-shadow: 0 0 6px var(--c-neon)"
 							></span>
-							Профіль
+							@if (authService.isAnonymous()) {
+								Анонімний акаунт
+							} @else if (authService.currentUser()) {
+								Google акаунт
+							} @else {
+								Профіль
+							}
 						</div>
 
 						@if (authService.currentUser(); as user) {
 							<h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
-								{{ user.displayName || 'Користувач' }}
+								@if (user.isAnonymous) {
+									Гість #{{ user.uid.substring(0, 6) }}
+								} @else {
+									{{ user.displayName || 'Користувач' }}
+								}
 							</h1>
 							<p class="mt-1 text-sm font-medium" style="color: var(--c-text-muted)">
-								{{ user.email }}
+								@if (user.isAnonymous) {
+									Сесія зберігається локально. Прив'яжіть Google для збереження.
+								} @else {
+									{{ user.email }}
+								}
 							</p>
 						} @else {
 							<h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
 								Гість
 							</h1>
 							<p class="mt-1 text-sm font-medium" style="color: var(--c-text-muted)">
-								Авторизуйтесь через Google, щоб зберігати свій прогрес
+								Авторизуйтесь через Google або розпочніть анонімно
 							</p>
 						}
 					</div>
 				</div>
 
-				<div class="flex items-center gap-3">
-					@if (authService.currentUser()) {
+				<!-- Actions -->
+				<div class="flex flex-wrap items-center gap-3">
+					@if (authService.isAnonymous()) {
+						<!-- Link with Google button -->
+						<button
+							type="button"
+							(click)="handleLinkGoogle()"
+							[disabled]="isLinking()"
+							class="theme-interactive theme-focus inline-flex h-11 items-center gap-2 rounded-[var(--radius-btn)] px-6 text-sm font-bold text-white shadow-md disabled:opacity-60"
+							style="background: var(--c-primary); box-shadow: 0 4px 14px color-mix(in srgb, var(--c-primary) 55%, transparent)"
+						>
+							@if (isLinking()) {
+								<span class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+								<span>Зв'язуємо...</span>
+							} @else {
+								<span class="material-symbols-outlined text-[18px]">link</span>
+								<span>Зв'язати з Google</span>
+							}
+						</button>
+
+						<button
+							type="button"
+							(click)="authService.signOut()"
+							class="theme-interactive theme-focus inline-flex h-11 items-center gap-2 rounded-[var(--radius-btn)] border-2 border-[var(--c-border)] px-5 text-sm font-bold transition-all hover:bg-[var(--c-bg-tertiary)]"
+							style="color: var(--c-text-strong)"
+						>
+							<span class="material-symbols-outlined text-[18px]">logout</span>
+							Вийти
+						</button>
+					} @else if (authService.currentUser()) {
 						<button
 							type="button"
 							(click)="authService.signOut()"
@@ -81,7 +137,7 @@
 							style="background: var(--c-primary)"
 						>
 							<span class="material-symbols-outlined text-[18px]">login</span>
-							Увійти через Google
+							Увійти
 						</a>
 					}
 				</div>

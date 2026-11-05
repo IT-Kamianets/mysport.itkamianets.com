@@ -43,7 +43,7 @@
 		<a
 			[routerLink]="authService.currentUser() ? '/profile' : '/login'"
 			class="theme-interactive group flex items-center justify-center gap-3 rounded-[var(--radius-btn)] p-1.5 transition-all hover:bg-[var(--c-bg-tertiary)] lg:justify-start lg:px-2"
-			[title]="authService.currentUser()?.displayName || 'Профіль'"
+			[title]="authService.currentUser()?.displayName || (authService.isAnonymous() ? 'Анонімний профіль' : 'Вхід')"
 		>
 			<!-- Profile photo avatar -->
 			<div
@@ -57,13 +57,16 @@
 						class="h-full w-full object-cover"
 						referrerpolicy="no-referrer"
 					/>
+				} @else if (authService.isAnonymous()) {
+					<span class="material-symbols-outlined text-[22px]" style="color: var(--c-primary)">visibility_off</span>
 				} @else {
 					<span class="material-symbols-outlined text-[24px]" style="color: var(--c-primary)">person</span>
 				}
+
 				@if (authService.currentUser()) {
 					<span
 						class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-[var(--c-bg-secondary)]"
-						style="background: #22c55e"
+						[style.background]="authService.isAnonymous() ? '#eab308' : '#22c55e'"
 					></span>
 				}
 			</div>
@@ -71,18 +74,27 @@
 			<!-- User details (expanded sidebar) -->
 			<div class="hidden min-w-0 flex-1 lg:block">
 				@if (authService.currentUser(); as user) {
-					<p class="truncate text-xs font-bold leading-tight" style="color: var(--c-text-strong)">
-						{{ user.displayName || 'Користувач' }}
-					</p>
-					<p class="truncate text-[11px] leading-tight" style="color: var(--c-text-muted)">
-						{{ user.email }}
-					</p>
+					@if (user.isAnonymous) {
+						<p class="truncate text-xs font-bold leading-tight" style="color: var(--c-text-strong)">
+							Гість #{{ user.uid.substring(0, 5) }}
+						</p>
+						<p class="truncate text-[11px] leading-tight" style="color: var(--c-primary)">
+							Зв'язати з Google
+						</p>
+					} @else {
+						<p class="truncate text-xs font-bold leading-tight" style="color: var(--c-text-strong)">
+							{{ user.displayName || 'Користувач' }}
+						</p>
+						<p class="truncate text-[11px] leading-tight" style="color: var(--c-text-muted)">
+							{{ user.email }}
+						</p>
+					}
 				} @else {
 					<p class="text-xs font-bold leading-tight" style="color: var(--c-primary)">
 						Увійти
 					</p>
 					<p class="text-[11px] leading-tight" style="color: var(--c-text-muted)">
-						Через Google
+						Google / Гість
 					</p>
 				}
 			</div>
