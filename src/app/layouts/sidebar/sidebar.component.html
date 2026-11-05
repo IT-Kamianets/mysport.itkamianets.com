@@ -23,7 +23,7 @@
 
 	<!-- Nav items -->
 	<ul class="flex flex-1 flex-col gap-1 self-stretch">
-		@for (item of navItems; track item.path) {
+		@for (item of navItems(); track item.path) {
 			<li>
 				<a
 					[routerLink]="item.path"
@@ -32,7 +32,7 @@
 					class="nav-link group flex h-11 items-center justify-center gap-3 rounded-[var(--radius-btn)] px-2 text-sm font-semibold transition-all lg:justify-start lg:px-3"
 				>
 					<span class="material-symbols-outlined text-[22px] shrink-0">{{ item.icon }}</span>
-					<span class="hidden lg:block">{{ item.label }}</span>
+					<span class="hidden lg:block">{{ item.labelKey | appTranslate }}</span>
 				</a>
 			</li>
 		}
@@ -43,7 +43,7 @@
 		<a
 			[routerLink]="authService.currentUser() ? '/profile' : '/login'"
 			class="theme-interactive group flex items-center justify-center gap-3 rounded-[var(--radius-btn)] p-1.5 transition-all hover:bg-[var(--c-bg-tertiary)] lg:justify-start lg:px-2"
-			[title]="authService.currentUser()?.displayName || (authService.isAnonymous() ? 'Анонімний профіль' : 'Вхід')"
+			[title]="authService.currentUser()?.displayName || ('Профіль' | appTranslate)"
 		>
 			<!-- Profile photo avatar -->
 			<div
@@ -76,14 +76,14 @@
 				@if (authService.currentUser(); as user) {
 					@if (user.isAnonymous) {
 						<p class="truncate text-xs font-bold leading-tight" style="color: var(--c-text-strong)">
-							Гість #{{ user.uid.substring(0, 5) }}
+							{{ 'Анонімний' | appTranslate }} #{{ user.uid.substring(0, 5) }}
 						</p>
 						<p class="truncate text-[11px] leading-tight" style="color: var(--c-primary)">
-							Зв'язати з Google
+							{{ 'Зв\'язати з Google' | appTranslate }}
 						</p>
 					} @else {
 						<p class="truncate text-xs font-bold leading-tight" style="color: var(--c-text-strong)">
-							{{ user.displayName || 'Користувач' }}
+							{{ user.displayName || ('Користувач' | appTranslate) }}
 						</p>
 						<p class="truncate text-[11px] leading-tight" style="color: var(--c-text-muted)">
 							{{ user.email }}
@@ -91,10 +91,10 @@
 					}
 				} @else {
 					<p class="text-xs font-bold leading-tight" style="color: var(--c-primary)">
-						Увійти
+						{{ 'Увійти' | appTranslate }}
 					</p>
 					<p class="text-[11px] leading-tight" style="color: var(--c-text-muted)">
-						Google / Гість
+						Google / {{ 'Гість' | appTranslate }}
 					</p>
 				}
 			</div>

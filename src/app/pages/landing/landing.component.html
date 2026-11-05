@@ -25,30 +25,29 @@
 				class="mt-5 text-5xl font-black tracking-tight sm:text-7xl"
 				style="color: var(--c-text-strong)"
 			>
-				Твій спорт —<br />
-				<span style="color: var(--c-primary)">наша платформа</span>
+				{{ 'Твій спорт — наша платформа' | appTranslate }}
 			</h1>
 
 			<p class="mt-5 max-w-xl text-lg leading-relaxed" style="color: var(--c-text-muted)">
-				Сторінка готова для наповнення контентом. Розпочни вже сьогодні.
+				{{ 'Плануй та відстежуй свої тренування у зручному форматі.' | appTranslate }}
 			</p>
 
 			<div class="mt-8 flex flex-wrap gap-4">
-				<button
-					type="button"
+				<a
+					routerLink="/training"
 					class="theme-interactive theme-focus inline-flex h-12 items-center gap-2 rounded-[var(--radius-btn)] px-8 text-sm font-bold text-white shadow-[var(--shadow-md)] transition-all"
 					style="background: var(--c-primary); box-shadow: 0 4px 20px color-mix(in srgb, var(--c-primary) 50%, transparent)"
 				>
-					Почати
+					<span>{{ 'Почати' | appTranslate }}</span>
 					<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-				</button>
-				<button
-					type="button"
+				</a>
+				<a
+					routerLink="/settings"
 					class="theme-interactive theme-focus inline-flex h-12 items-center rounded-[var(--radius-btn)] border-2 border-[var(--c-primary)] bg-transparent px-8 text-sm font-bold"
 					style="color: var(--c-primary)"
 				>
-					Дізнатися більше
-				</button>
+					<span>{{ 'Дізнатися більше' | appTranslate }}</span>
+				</a>
 			</div>
 		</div>
 	</section>
@@ -59,16 +58,15 @@
 			class="mb-10 text-center text-3xl font-black tracking-tight"
 			style="color: var(--c-text-strong)"
 		>
-			Чому <span style="color: var(--c-primary)">MySport</span>?
+			{{ 'Чому MySport?' | appTranslate }}
 		</h2>
 
 		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			@for (card of cards; track card.icon) {
+			@for (card of cards(); track card.icon) {
 				<div
 					class="group relative overflow-hidden rounded-[var(--radius-card)] border-2 border-[var(--c-border)] p-6 shadow-[var(--shadow-sm)] transition-all hover:shadow-[var(--shadow-md)]"
 					style="background: var(--c-bg-secondary)"
 				>
-					<!-- top accent line -->
 					<div class="absolute inset-x-0 top-0 h-1" style="background: var(--c-primary)"></div>
 
 					<span
@@ -76,34 +74,12 @@
 						style="color: var(--c-primary)"
 					>{{ card.icon }}</span>
 
-					<h3 class="text-lg font-bold" style="color: var(--c-text-strong)">{{ card.title }}</h3>
+					<h3 class="text-lg font-bold" style="color: var(--c-text-strong)">{{ card.titleKey | appTranslate }}</h3>
 					<p class="mt-2 text-sm leading-relaxed" style="color: var(--c-text-muted)">
-						{{ card.desc }}
+						{{ card.descKey }}
 					</p>
 				</div>
 			}
-		</div>
-	</section>
-
-	<!-- CTA strip -->
-	<section
-		class="border-y-4 border-[var(--c-primary)]"
-		style="background: var(--c-bg-tertiary)"
-	>
-		<div
-			class="mx-auto flex max-w-[var(--container)] flex-col items-center gap-6 px-4 py-14 text-center sm:px-6"
-		>
-			<p class="text-2xl font-black" style="color: var(--c-text-strong)">
-				Готовий до нових досягнень?
-			</p>
-			<button
-				type="button"
-				class="theme-interactive theme-focus inline-flex h-12 items-center gap-2 rounded-[var(--radius-btn)] px-10 text-sm font-bold text-white"
-				style="background: var(--c-primary); box-shadow: 0 4px 20px color-mix(in srgb, var(--c-primary) 60%, transparent)"
-			>
-				Зареєструватися
-				<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-			</button>
 		</div>
 	</section>
 </div>

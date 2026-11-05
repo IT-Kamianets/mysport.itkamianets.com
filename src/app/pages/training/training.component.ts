@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { AppTranslatePipe } from '../../core/i18n/translate.pipe';
 
 @Component({
 	selector: 'app-training',
-	imports: [],
+	imports: [AppTranslatePipe],
 	template: `
 		<div class="min-h-screen" style="background: var(--c-bg-primary)">
 			<div class="mx-auto max-w-[var(--container)] px-4 py-14 sm:px-6">
@@ -18,14 +19,14 @@ import { Component } from '@angular/core';
 						style="color: var(--c-primary)"
 					>
 						<span class="material-symbols-outlined text-[16px]">fitness_center</span>
-						Тренування
+						<span>{{ 'Тренування' | appTranslate }}</span>
 					</div>
 
 					<h1 class="mt-5 text-4xl font-black tracking-tight sm:text-5xl" style="color: var(--c-text-strong)">
-						Мої тренування
+						{{ 'Мої тренування' | appTranslate }}
 					</h1>
 					<p class="mt-3 max-w-xl text-base leading-relaxed" style="color: var(--c-text-muted)">
-						Тут будуть відображатися твої тренування та програми.
+						{{ 'Тут будуть відображатися твої тренування та програми.' | appTranslate }}
 					</p>
 
 					<button
@@ -34,7 +35,7 @@ import { Component } from '@angular/core';
 						style="background: var(--c-primary); box-shadow: 0 4px 20px color-mix(in srgb, var(--c-primary) 55%, transparent)"
 					>
 						<span class="material-symbols-outlined text-[18px]">add</span>
-						Додати тренування
+						<span>{{ 'Додати тренування' | appTranslate }}</span>
 					</button>
 				</div>
 			</div>

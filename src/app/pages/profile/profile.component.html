@@ -56,36 +56,30 @@
 								class="h-2 w-2 rounded-full"
 								style="background: var(--c-primary); box-shadow: 0 0 6px var(--c-neon)"
 							></span>
-							@if (authService.isAnonymous()) {
-								Анонімний акаунт
-							} @else if (authService.currentUser()) {
-								Google акаунт
-							} @else {
-								Профіль
-							}
+							<span>{{ (authService.isAnonymous() ? 'Анонімний' : 'Профіль') | appTranslate }}</span>
 						</div>
 
 						@if (authService.currentUser(); as user) {
 							<h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
 								@if (user.isAnonymous) {
-									Гість #{{ user.uid.substring(0, 6) }}
+									{{ 'Гість' | appTranslate }} #{{ user.uid.substring(0, 6) }}
 								} @else {
-									{{ user.displayName || 'Користувач' }}
+									{{ user.displayName || ('Користувач' | appTranslate) }}
 								}
 							</h1>
 							<p class="mt-1 text-sm font-medium" style="color: var(--c-text-muted)">
 								@if (user.isAnonymous) {
-									Сесія зберігається локально. Прив'яжіть Google для збереження.
+									ID: {{ user.uid }}
 								} @else {
 									{{ user.email }}
 								}
 							</p>
 						} @else {
 							<h1 class="mt-2 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
-								Гість
+								{{ 'Гість' | appTranslate }}
 							</h1>
 							<p class="mt-1 text-sm font-medium" style="color: var(--c-text-muted)">
-								Авторизуйтесь через Google або розпочніть анонімно
+								{{ 'Увійти' | appTranslate }}
 							</p>
 						}
 					</div>
@@ -104,10 +98,10 @@
 						>
 							@if (isLinking()) {
 								<span class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-								<span>Зв'язуємо...</span>
+								<span>{{ 'Зв\'язати з Google' | appTranslate }}...</span>
 							} @else {
 								<span class="material-symbols-outlined text-[18px]">link</span>
-								<span>Зв'язати з Google</span>
+								<span>{{ 'Зв\'язати з Google' | appTranslate }}</span>
 							}
 						</button>
 
@@ -118,7 +112,7 @@
 							style="color: var(--c-text-strong)"
 						>
 							<span class="material-symbols-outlined text-[18px]">logout</span>
-							Вийти
+							<span>{{ 'Вийти' | appTranslate }}</span>
 						</button>
 					} @else if (authService.currentUser()) {
 						<button
@@ -128,7 +122,7 @@
 							style="color: var(--c-text-strong)"
 						>
 							<span class="material-symbols-outlined text-[18px]">logout</span>
-							Вийти
+							<span>{{ 'Вийти' | appTranslate }}</span>
 						</button>
 					} @else {
 						<a
@@ -137,7 +131,7 @@
 							style="background: var(--c-primary)"
 						>
 							<span class="material-symbols-outlined text-[18px]">login</span>
-							Увійти
+							<span>{{ 'Увійти' | appTranslate }}</span>
 						</a>
 					}
 				</div>
@@ -146,7 +140,7 @@
 
 		<!-- Stats -->
 		<div class="mt-8 grid gap-4 sm:grid-cols-3">
-			@for (stat of stats; track stat.label) {
+			@for (stat of stats(); track stat.labelKey) {
 				<div
 					class="relative overflow-hidden rounded-[var(--radius-card)] border-2 border-[var(--c-border)] p-6 shadow-[var(--shadow-sm)]"
 					style="background: var(--c-bg-secondary)"
@@ -158,7 +152,7 @@
 					>{{ stat.icon }}</span>
 					<p class="text-3xl font-black" style="color: var(--c-text-strong)">{{ stat.value }}</p>
 					<p class="mt-1 text-xs font-semibold uppercase tracking-widest" style="color: var(--c-text-muted)">
-						{{ stat.label }}
+						{{ stat.labelKey | appTranslate }}
 					</p>
 				</div>
 			}
