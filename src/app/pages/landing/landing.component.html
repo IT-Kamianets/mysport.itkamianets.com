@@ -1,37 +1,109 @@
-<section class="mx-auto max-w-[var(--container)] px-4 py-12 sm:px-6 sm:py-16">
-	<div
-		class="relative overflow-hidden rounded-[calc(var(--radius-card)*1.8)] border border-[var(--c-border)] bg-[var(--c-bg-secondary)] p-8 shadow-[var(--shadow-md)] sm:p-12"
+<div class="min-h-screen bg-[var(--c-bg-primary)]">
+
+	<!-- Hero -->
+	<section
+		class="relative overflow-hidden border-b-4 border-[var(--c-primary)] bg-[var(--c-bg-secondary)]"
+	>
+		<!-- decorative glow blob -->
+		<div
+			class="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full blur-3xl opacity-40"
+			style="background: var(--c-primary)"
+		></div>
+
+		<div class="relative mx-auto max-w-[var(--container)] px-4 py-20 sm:px-6 sm:py-28">
+			<div
+				class="inline-flex items-center gap-2 rounded-full border-2 border-[var(--c-primary)] bg-[var(--c-bg-tertiary)] px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--c-primary)]"
+			>
+				<span
+					class="h-2.5 w-2.5 animate-pulse rounded-full"
+					style="background: var(--c-primary); box-shadow: 0 0 10px var(--c-neon)"
+				></span>
+				MySport
+			</div>
+
+			<h1
+				class="mt-5 text-5xl font-black tracking-tight sm:text-7xl"
+				style="color: var(--c-text-strong)"
+			>
+				Твій спорт —<br />
+				<span style="color: var(--c-primary)">наша платформа</span>
+			</h1>
+
+			<p class="mt-5 max-w-xl text-lg leading-relaxed" style="color: var(--c-text-muted)">
+				Сторінка готова для наповнення контентом. Розпочни вже сьогодні.
+			</p>
+
+			<div class="mt-8 flex flex-wrap gap-4">
+				<button
+					type="button"
+					class="theme-interactive theme-focus inline-flex h-12 items-center gap-2 rounded-[var(--radius-btn)] px-8 text-sm font-bold text-white shadow-[var(--shadow-md)] transition-all"
+					style="background: var(--c-primary); box-shadow: 0 4px 20px color-mix(in srgb, var(--c-primary) 50%, transparent)"
+				>
+					Почати
+					<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+				</button>
+				<button
+					type="button"
+					class="theme-interactive theme-focus inline-flex h-12 items-center rounded-[var(--radius-btn)] border-2 border-[var(--c-primary)] bg-transparent px-8 text-sm font-bold"
+					style="color: var(--c-primary)"
+				>
+					Дізнатися більше
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- Feature cards -->
+	<section class="mx-auto max-w-[var(--container)] px-4 py-16 sm:px-6">
+		<h2
+			class="mb-10 text-center text-3xl font-black tracking-tight"
+			style="color: var(--c-text-strong)"
+		>
+			Чому <span style="color: var(--c-primary)">MySport</span>?
+		</h2>
+
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			@for (card of cards; track card.icon) {
+				<div
+					class="group relative overflow-hidden rounded-[var(--radius-card)] border-2 border-[var(--c-border)] p-6 shadow-[var(--shadow-sm)] transition-all hover:shadow-[var(--shadow-md)]"
+					style="background: var(--c-bg-secondary)"
+				>
+					<!-- top accent line -->
+					<div class="absolute inset-x-0 top-0 h-1" style="background: var(--c-primary)"></div>
+
+					<span
+						class="material-symbols-outlined mb-4 block text-[40px]"
+						style="color: var(--c-primary)"
+					>{{ card.icon }}</span>
+
+					<h3 class="text-lg font-bold" style="color: var(--c-text-strong)">{{ card.title }}</h3>
+					<p class="mt-2 text-sm leading-relaxed" style="color: var(--c-text-muted)">
+						{{ card.desc }}
+					</p>
+				</div>
+			}
+		</div>
+	</section>
+
+	<!-- CTA strip -->
+	<section
+		class="border-y-4 border-[var(--c-primary)]"
+		style="background: var(--c-bg-tertiary)"
 	>
 		<div
-			class="inline-flex items-center gap-2 rounded-full border border-[var(--c-border)] bg-[var(--c-bg-tertiary)] px-3 py-1 text-xs font-semibold tracking-wider uppercase text-[var(--c-primary)]"
+			class="mx-auto flex max-w-[var(--container)] flex-col items-center gap-6 px-4 py-14 text-center sm:px-6"
 		>
-			<span
-				class="h-2 w-2 rounded-full bg-[var(--c-primary)] shadow-[0_0_8px_var(--c-primary)]"
-			></span>
-			<span>MySport</span>
-		</div>
-
-		<h1 class="mt-4 text-4xl font-extrabold tracking-tight text-[var(--c-text-strong)] sm:text-5xl">
-			Landing
-		</h1>
-
-		<p class="mt-3 max-w-xl text-base text-[var(--c-text-muted)]">
-			Сторінка готова для наповнення контентом.
-		</p>
-
-		<div class="mt-6 flex flex-wrap items-center gap-3">
+			<p class="text-2xl font-black" style="color: var(--c-text-strong)">
+				Готовий до нових досягнень?
+			</p>
 			<button
 				type="button"
-				class="theme-interactive theme-focus inline-flex h-11 items-center justify-center rounded-[var(--radius-btn)] bg-[var(--c-primary)] px-6 text-sm font-semibold text-white shadow-[var(--shadow-sm)] hover:bg-[var(--c-primary-hover)]"
+				class="theme-interactive theme-focus inline-flex h-12 items-center gap-2 rounded-[var(--radius-btn)] px-10 text-sm font-bold text-white"
+				style="background: var(--c-primary); box-shadow: 0 4px 20px color-mix(in srgb, var(--c-primary) 60%, transparent)"
 			>
-				Почати
-			</button>
-			<button
-				type="button"
-				class="theme-interactive theme-focus inline-flex h-11 items-center justify-center rounded-[var(--radius-btn)] border border-[var(--c-border)] bg-[var(--c-bg-primary)] px-6 text-sm font-semibold text-[var(--c-text-strong)] hover:bg-[var(--c-bg-tertiary)]"
-			>
-				Дізнатися більше
+				Зареєструватися
+				<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 			</button>
 		</div>
-	</div>
-</section>
+	</section>
+</div>

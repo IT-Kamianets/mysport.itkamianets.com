@@ -44,15 +44,19 @@ export class App {
 			const mode = this._themeService.mode();
 			const doc = this._document.documentElement;
 			if (mode === 'dark') {
-				doc.style.setProperty('--c-text', '#f3ebff');
+				doc.style.setProperty('--c-text', '#ecdeff');
 				doc.style.setProperty('--c-text-strong', '#ffffff');
 				doc.style.setProperty('--c-highlight', '#d8b4fe');
+				doc.style.setProperty('--c-accent', '#c084fc');
 				doc.style.setProperty('--c-neon', '#b026ff');
+				doc.style.setProperty('--c-stripe', 'rgba(176, 38, 255, 0.08)');
 			} else {
-				doc.style.setProperty('--c-text', '#1c1917');
-				doc.style.setProperty('--c-text-strong', '#1c1917');
+				doc.style.setProperty('--c-text', '#3b1a06');
+				doc.style.setProperty('--c-text-strong', '#1c0a00');
 				doc.style.setProperty('--c-highlight', '#ea580c');
-				doc.style.setProperty('--c-neon', '#f97316');
+				doc.style.setProperty('--c-accent', '#f97316');
+				doc.style.setProperty('--c-neon', '#ff6b2b');
+				doc.style.setProperty('--c-stripe', 'rgba(234, 88, 12, 0.07)');
 			}
 		});
 	}

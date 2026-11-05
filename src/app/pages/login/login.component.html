@@ -1,31 +1,80 @@
-<section class="mx-auto max-w-[var(--container)] px-4 py-12 sm:px-6 sm:py-16">
+<div
+	class="flex min-h-[calc(100vh-8rem)] items-center justify-center px-4 py-16"
+	style="background: var(--c-bg-primary)"
+>
+	<!-- glow behind card -->
 	<div
-		class="mx-auto max-w-md rounded-[calc(var(--radius-card)*1.8)] border border-[var(--c-border)] bg-[var(--c-bg-secondary)] p-8 shadow-[var(--shadow-md)]"
+		class="pointer-events-none absolute h-72 w-72 rounded-full blur-3xl opacity-30"
+		style="background: var(--c-primary)"
+	></div>
+
+	<div
+		class="relative w-full max-w-md overflow-hidden rounded-[calc(var(--radius-card)*2)] border-2 border-[var(--c-border)] p-8 shadow-[var(--shadow-md)]"
+		style="background: var(--c-bg-secondary)"
 	>
+		<!-- top accent bar -->
+		<div class="absolute inset-x-0 top-0 h-1.5" style="background: var(--c-primary)"></div>
+
 		<div
-			class="inline-flex items-center gap-2 rounded-full border border-[var(--c-border)] bg-[var(--c-bg-tertiary)] px-3 py-1 text-xs font-semibold tracking-wider uppercase text-[var(--c-primary)]"
+			class="inline-flex items-center gap-2 rounded-full border-2 border-[var(--c-border)] bg-[var(--c-bg-tertiary)] px-4 py-1.5 text-xs font-bold tracking-widest uppercase"
+			style="color: var(--c-primary)"
 		>
 			<span
-				class="h-2 w-2 rounded-full bg-[var(--c-primary)] shadow-[0_0_8px_var(--c-primary)]"
+				class="h-2.5 w-2.5 rounded-full"
+				style="background: var(--c-primary); box-shadow: 0 0 8px var(--c-neon)"
 			></span>
-			<span>Авторизація</span>
+			Авторизація
 		</div>
 
-		<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-[var(--c-text-strong)] sm:text-4xl">
-			Login
+		<h1 class="mt-5 text-3xl font-black tracking-tight sm:text-4xl" style="color: var(--c-text-strong)">
+			Вхід до кабінету
 		</h1>
-
-		<p class="mt-2 text-sm text-[var(--c-text-muted)]">
-			Вхід до особистого кабінету
+		<p class="mt-2 text-sm" style="color: var(--c-text-muted)">
+			Увійди, щоб продовжити тренування
 		</p>
 
-		<div class="mt-6">
+		<div class="mt-8 flex flex-col gap-4">
+			<div class="flex flex-col gap-1">
+				<label class="text-xs font-semibold uppercase tracking-widest" style="color: var(--c-text-muted)">
+					Email
+				</label>
+				<input
+					type="email"
+					placeholder="you@example.com"
+					class="h-11 rounded-[var(--radius)] border-2 border-[var(--c-border)] bg-[var(--c-bg-primary)] px-4 text-sm outline-none transition-all focus:border-[var(--c-primary)] focus:shadow-[var(--focus-ring)]"
+					style="color: var(--c-text); caret-color: var(--c-primary)"
+				/>
+			</div>
+
+			<div class="flex flex-col gap-1">
+				<label class="text-xs font-semibold uppercase tracking-widest" style="color: var(--c-text-muted)">
+					Пароль
+				</label>
+				<input
+					type="password"
+					placeholder="••••••••"
+					class="h-11 rounded-[var(--radius)] border-2 border-[var(--c-border)] bg-[var(--c-bg-primary)] px-4 text-sm outline-none transition-all focus:border-[var(--c-primary)] focus:shadow-[var(--focus-ring)]"
+					style="color: var(--c-text); caret-color: var(--c-primary)"
+				/>
+			</div>
+
 			<button
 				type="button"
-				class="theme-interactive theme-focus flex w-full h-11 items-center justify-center rounded-[var(--radius-btn)] bg-[var(--c-primary)] px-6 text-sm font-semibold text-white shadow-[var(--shadow-sm)] hover:bg-[var(--c-primary-hover)]"
+				class="theme-interactive theme-focus mt-2 flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-btn)] text-sm font-bold text-white shadow-[var(--shadow-md)] transition-all"
+				style="background: var(--c-primary); box-shadow: 0 4px 20px color-mix(in srgb, var(--c-primary) 55%, transparent)"
 			>
 				Увійти
+				<span class="material-symbols-outlined text-[18px]">login</span>
 			</button>
+
+			<p class="text-center text-xs" style="color: var(--c-text-muted)">
+				Немає акаунту?
+				<a
+					class="font-semibold underline-offset-2 hover:underline"
+					style="color: var(--c-primary)"
+					href="#"
+				>Зареєструватися</a>
+			</p>
 		</div>
 	</div>
-</section>
+</div>
