@@ -20,6 +20,26 @@ export const routes: Routes = [
 		pathMatch: 'full',
 	},
 	{
+		path: 'training',
+		data: {
+			meta: {
+				...buildRouteMeta(companyProfile, '/training'),
+			},
+		},
+		loadComponent: () =>
+			import('./pages/training/training.component').then((m) => m.TrainingComponent),
+	},
+	{
+		path: 'settings',
+		data: {
+			meta: {
+				...buildRouteMeta(companyProfile, '/settings'),
+			},
+		},
+		loadComponent: () =>
+			import('./pages/settings/settings.component').then((m) => m.SettingsComponent),
+	},
+	{
 		path: 'login',
 		data: {
 			meta: {

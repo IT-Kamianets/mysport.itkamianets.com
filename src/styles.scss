@@ -27,3 +27,20 @@ body {
 		box-shadow: var(--focus-ring);
 	}
 }
+
+/* Sidebar nav link */
+.nav-link {
+	color: var(--c-text-muted);
+
+	&:hover {
+		background: var(--c-bg-tertiary);
+		color: var(--c-text-strong);
+	}
+}
+
+.nav-active {
+	background: var(--c-bg-tertiary);
+	color: var(--c-primary) !important;
+	font-weight: 700;
+	box-shadow: inset 3px 0 0 var(--c-primary);
+}

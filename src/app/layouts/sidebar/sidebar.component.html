@@ -1,0 +1,71 @@
+<nav
+	class="fixed inset-y-0 left-0 z-40 flex w-16 flex-col items-center gap-2 border-r-2 border-[var(--c-border)] py-4 lg:w-56 lg:items-stretch lg:px-3"
+	style="background: var(--c-bg-secondary)"
+>
+	<!-- Logo -->
+	<a
+		routerLink="/"
+		class="mb-4 flex shrink-0 items-center justify-center rounded-[var(--radius-card)] p-2 lg:justify-start lg:gap-3 lg:px-3"
+	>
+		<img
+			class="h-8 w-auto"
+			ngSrc="logo.png"
+			width="132"
+			height="40"
+			alt="MySport logo"
+			priority
+		/>
+		<span
+			class="hidden text-sm font-black tracking-widest uppercase lg:block"
+			style="color: var(--c-primary)"
+		>MySport</span>
+	</a>
+
+	<!-- Nav items -->
+	<ul class="flex flex-1 flex-col gap-1 self-stretch">
+		@for (item of navItems; track item.path) {
+			<li>
+				<a
+					[routerLink]="item.path"
+					[routerLinkActiveOptions]="{ exact: item.exact }"
+					routerLinkActive="nav-active"
+					class="nav-link group flex h-11 items-center justify-center gap-3 rounded-[var(--radius-btn)] px-2 text-sm font-semibold transition-all lg:justify-start lg:px-3"
+				>
+					<span class="material-symbols-outlined text-[22px] shrink-0">{{ item.icon }}</span>
+					<span class="hidden lg:block">{{ item.label }}</span>
+				</a>
+			</li>
+		}
+	</ul>
+
+	<!-- Bottom controls -->
+	<div class="flex flex-col items-center gap-2 self-stretch lg:items-stretch">
+		<!-- Language toggle -->
+		<button
+			type="button"
+			class="theme-interactive theme-focus flex h-10 items-center justify-center gap-2 rounded-[var(--radius-btn)] px-2 text-sm font-medium transition-all hover:bg-[var(--c-bg-tertiary)] lg:justify-start lg:px-3"
+			style="color: var(--c-text-muted)"
+			(click)="nextLanguage()"
+		>
+			<img
+				class="h-5 w-7 shrink-0 rounded-[4px] border border-black/10 object-cover"
+				[alt]="currentLanguage().nativeName"
+				[ngSrc]="currentLanguage().flagSrc"
+				width="28"
+				height="20"
+			/>
+			<span class="hidden lg:block">{{ currentLanguage().nativeName }}</span>
+		</button>
+
+		<!-- Theme toggle -->
+		<button
+			type="button"
+			class="theme-interactive theme-focus flex h-10 items-center justify-center gap-2 rounded-[var(--radius-btn)] px-2 text-sm font-medium transition-all hover:bg-[var(--c-bg-tertiary)] lg:justify-start lg:px-3"
+			style="color: var(--c-text-muted)"
+			(click)="toggleMode()"
+		>
+			<span class="material-symbols-outlined shrink-0 text-[22px]">{{ toggleIcon() }}</span>
+			<span class="hidden lg:block">{{ mode() === 'dark' ? 'Світла' : 'Темна' }}</span>
+		</button>
+	</div>
+</nav>

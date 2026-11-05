@@ -5,19 +5,18 @@ import { CanonicalService } from '@wawjs/ngx-default';
 import { LanguageService } from '@wawjs/ngx-translate';
 import { ThemeService } from '@wawjs/ngx-ui';
 import { environment } from '../environments/environment';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { TopbarComponent } from './layouts/topbar/topbar.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet, TopbarComponent, FooterComponent],
+	imports: [RouterOutlet, SidebarComponent],
 	template: `
-		<div class="flex min-h-screen flex-col">
-			<app-topbar />
-			<main class="flex-1">
+		<div class="flex min-h-screen">
+			<app-sidebar />
+			<!-- offset for sidebar: 4rem narrow / 14rem wide -->
+			<main class="flex-1 pl-16 lg:pl-56">
 				<router-outlet />
 			</main>
-			<app-footer />
 		</div>
 	`,
 })
