@@ -85,12 +85,12 @@ export class TopbarComponent {
 
 function _toAppLanguage(language: Language | undefined): AppLanguage {
 	const fallback: AppLanguage = {
-		code: 'en',
-		name: 'English',
-		nativeName: 'English',
-		flagSrc: 'flags/united-kingdom.svg',
-		htmlLang: 'en',
-		population: 0,
+		code: 'ua',
+		name: 'Ukrainian',
+		nativeName: 'Українська',
+		flagSrc: 'flags/ukraine.svg',
+		htmlLang: 'uk',
+		population: 35,
 	};
 
 	return { ...fallback, ...(language as Partial<AppLanguage> | undefined) };

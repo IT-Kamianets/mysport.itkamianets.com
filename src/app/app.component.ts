@@ -3,6 +3,7 @@ import { Component, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CanonicalService } from '@wawjs/ngx-default';
 import { LanguageService } from '@wawjs/ngx-translate';
+import { ThemeService } from '@wawjs/ngx-ui';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { TopbarComponent } from './layouts/topbar/topbar.component';
@@ -24,6 +25,7 @@ export class App {
 	private readonly _canonicalService = inject(CanonicalService);
 	private readonly _document = inject(DOCUMENT);
 	private readonly _languageService = inject(LanguageService);
+	private readonly _themeService = inject(ThemeService);
 
 	constructor() {
 		this._canonicalService.initialize();
@@ -35,6 +37,22 @@ export class App {
 
 			if (htmlLang) {
 				this._document.documentElement.lang = htmlLang;
+			}
+		});
+
+		effect(() => {
+			const mode = this._themeService.mode();
+			const doc = this._document.documentElement;
+			if (mode === 'dark') {
+				doc.style.setProperty('--c-text', '#f3ebff');
+				doc.style.setProperty('--c-text-strong', '#ffffff');
+				doc.style.setProperty('--c-highlight', '#d8b4fe');
+				doc.style.setProperty('--c-neon', '#b026ff');
+			} else {
+				doc.style.setProperty('--c-text', '#1c1917');
+				doc.style.setProperty('--c-text-strong', '#1c1917');
+				doc.style.setProperty('--c-highlight', '#ea580c');
+				doc.style.setProperty('--c-neon', '#f97316');
 			}
 		});
 	}
