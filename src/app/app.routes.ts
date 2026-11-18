@@ -30,6 +30,16 @@ export const routes: Routes = [
 			import('./pages/training/training.component').then((m) => m.TrainingComponent),
 	},
 	{
+		path: 'orm',
+		data: {
+			meta: {
+				...buildRouteMeta(companyProfile, '/orm'),
+			},
+		},
+		loadComponent: () =>
+			import('./pages/orm/orm.component').then((m) => m.OrmComponent),
+	},
+	{
 		path: 'settings',
 		data: {
 			meta: {

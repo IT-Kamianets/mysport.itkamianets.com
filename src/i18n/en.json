@@ -1,6 +1,7 @@
 {
   "Головна": "Home",
   "Тренування": "Workouts",
+  "Калькулятор ОПМ": "1RM Calculator",
   "Налаштування": "Settings",
   "Профіль": "Profile",
   "Увійти": "Sign in",
@@ -35,5 +36,17 @@
   "Спільнота": "Community",
   "Днів підряд": "Streak Days",
   "Мої тренування": "My Workouts",
-  "Додати тренування": "Add Workout"
+  "Додати тренування": "Add Workout",
+  "Одноповторний максимум": "One-Rep Maximum (1RM)",
+  "Вага": "Weight",
+  "Повторення": "Reps",
+  "Формула": "Formula",
+  "Відсотки від ОПМ": "1RM Percentages",
+  "Таблиця повторень": "Rep Maxes",
+  "Швидкий вибір": "Quick Presets",
+  "Жим лежачи": "Bench Press",
+  "Присідання": "Squat",
+  "Станова тяга": "Deadlift",
+  "Армійський жим": "Overhead Press",
+  "Розрахунок максимальної ваги на 1 повторення": "Calculate your one-rep maximum and training intensity zones."
 }
