@@ -32,10 +32,10 @@ export interface SeoPageOverride extends Partial<SeoMetadata> {
 export interface CompanyStructuredData {
 	type: string;
 	priceRange: string;
-	servesCuisine: string;
-	addressLocality: string;
-	addressCountry: string;
-	sameAs: string[];
+	servesCuisine?: string;
+	addressLocality?: string;
+	addressCountry?: string;
+	sameAs?: string[];
 	custom?: Record<string, unknown>;
 }
 
@@ -44,10 +44,11 @@ export interface CompanyProfile extends Company {
 	locale: string;
 	logo: string;
 	phone: string;
-	email: string;
+	email?: string;
 	address: string;
 	currency: CompanyCurrency;
 	defaultSeo: SeoMetadata;
 	pageSeo: Record<string, SeoPageOverride>;
 	structuredData: CompanyStructuredData;
+	telegramImage?: string;
 }

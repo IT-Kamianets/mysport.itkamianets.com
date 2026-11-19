@@ -37,7 +37,7 @@
 					<img
 						class="h-5 w-7 rounded-[4px] border border-black/10 object-cover"
 						[alt]="currentLanguage().nativeName"
-						[ngSrc]="currentLanguage().flagSrc"
+						[ngSrc]="currentLanguage().flagSrc ?? ''"
 						width="28"
 						height="20"
 					/>
@@ -68,7 +68,7 @@
 								<img
 									class="h-5 w-7 rounded-[4px] border border-black/10 object-cover"
 									[alt]="language.nativeName"
-									[ngSrc]="language.flagSrc"
+									[ngSrc]="language.flagSrc ?? ''"
 									width="28"
 									height="20"
 								/>

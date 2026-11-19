@@ -1,9 +1,30 @@
 {
-  "_id": "",
-  "name": "MySport",
-  "title": "MySport",
-  "description": "Тренування, прогнози та статистика для спортсменів. Відстежуйте прогрес, аналізуйте результати та досягайте своїх цілей.",
-  "image": "/logo.png",
-  "telegramImage": "/seo/telegram-seo-image.png",
-  "siteUrl": "https://mysport.itkamianets.com"
+	"name": "MySport",
+	"siteUrl": "https://mysport.itkamianets.com",
+	"telegramImage": "/assets/seo-image.png",
+	"defaultSeo": {
+		"title": "MySport — Тренування, Калькулятор ОПМ, Налаштування",
+		"description": "MySport — платформа для тренувань та розрахунку ОПМ. Налаштуйте свій профіль, відстежуйте прогрес та досягайте цілей.",
+		"image": "/assets/seo-image.png",
+		"robots": "index, follow"
+	},
+	"social": {
+		"twitter": "https://twitter.com/mySport",
+		"facebook": "https://facebook.com/mySport",
+		"instagram": "https://instagram.com/mySport",
+		"linkedin": "https://linkedin.com/company/mySport",
+		"youtube": "https://youtube.com/@mySport",
+		"pinterest": "https://pinterest.com/mySport"
+	},
+	"keywords": [
+		"тренування",
+		"ОПМ",
+		"калькулятор",
+		"фітнес",
+		"спорт",
+		"здоров'я",
+		"MySport"
+	],
+	"author": "MySport Team",
+	"copyright": "© 2024 MySport. Всі права захищено."
 }

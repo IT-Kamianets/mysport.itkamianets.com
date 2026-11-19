@@ -39,3 +39,7 @@ Thumbs.db
 # Firebase
 .firebase/
 firebase-debug.log
+
+# Git
+.git
+<EOF>

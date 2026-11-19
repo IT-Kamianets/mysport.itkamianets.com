@@ -25,9 +25,9 @@ export class SidebarComponent {
 	protected readonly navItems = computed<NavItem[]>(() => {
 		this._languageService.language();
 		return [
-			{ icon: 'fitness_center',   labelKey: 'Тренування',       path: '/training',    exact: false },
-			{ icon: 'calculate',        labelKey: 'Калькулятор ОПМ',  path: '/orm',         exact: false },
-			{ icon: 'settings',         labelKey: 'Налаштування',      path: '/settings',    exact: false },
+			{ icon: 'fitness_center', labelKey: 'Тренування', path: '/training', exact: false },
+			{ icon: 'calculate', labelKey: 'Калькулятор ОПМ', path: '/orm', exact: false },
+			{ icon: 'settings', labelKey: 'Налаштування', path: '/settings', exact: false },
 		];
 	});
 }

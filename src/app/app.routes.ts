@@ -60,16 +60,6 @@ export const routes: Routes = [
 			import('./pages/login/login.component').then((m) => m.LoginComponent),
 	},
 	{
-		path: 'profile',
-		data: {
-			meta: {
-				...buildRouteMeta(companyProfile, '/profile'),
-			},
-		},
-		loadComponent: () =>
-			import('./pages/profile/profile.component').then((m) => m.ProfileComponent),
-	},
-	{
 		path: '**',
 		redirectTo: '',
 	},

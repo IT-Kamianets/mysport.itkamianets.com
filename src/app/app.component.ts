@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { CanonicalService } from '@wawjs/ngx-default';
 import { LanguageService } from '@wawjs/ngx-translate';
 import { ThemeService } from '@wawjs/ngx-ui';
-import { environment } from '../environments/environment';
+import { environment, type AppLanguage } from '../environments/environment';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 @Component({
@@ -32,7 +32,7 @@ export class App {
 		effect(() => {
 			const language = this._languageService.language();
 			const htmlLang =
-				environment.languages.find((item) => item.code === language)?.htmlLang ?? language;
+				(environment.languages.find((item: AppLanguage) => item.code === language) as AppLanguage | undefined)?.htmlLang ?? language;
 
 			if (htmlLang) {
 				this._document.documentElement.lang = htmlLang;
