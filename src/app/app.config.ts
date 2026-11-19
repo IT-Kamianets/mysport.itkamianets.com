@@ -41,7 +41,7 @@ export const appConfig: ApplicationConfig = {
 					description: companyProfile.defaultSeo.description,
 					image: buildAbsoluteUrl(
 						companyProfile.siteUrl,
-						companyProfile.defaultSeo.image,
+						companyProfile.telegramImage ?? companyProfile.defaultSeo.image,
 					),
 					robots: companyProfile.defaultSeo.robots,
 				},

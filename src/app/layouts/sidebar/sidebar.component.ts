@@ -28,7 +28,6 @@ export class SidebarComponent {
 			{ icon: 'fitness_center',   labelKey: 'Тренування',       path: '/training',    exact: false },
 			{ icon: 'calculate',        labelKey: 'Калькулятор ОПМ',  path: '/orm',         exact: false },
 			{ icon: 'settings',         labelKey: 'Налаштування',      path: '/settings',    exact: false },
-			{ icon: 'person',           labelKey: 'Профіль',           path: '/profile',     exact: false },
 		];
 	});
 }

@@ -3,6 +3,7 @@
   "name": "MySport",
   "title": "MySport",
   "description": "Тренування, прогнози та статистика для спортсменів. Відстежуйте прогрес, аналізуйте результати та досягайте своїх цілей.",
-  "image": "https://mysport.itkamianets.com/logo.png",
-	"siteUrl": "https://mysport.itkamianets.com"
+  "image": "/logo.png",
+  "telegramImage": "/seo/telegram-seo-image.png",
+  "siteUrl": "https://mysport.itkamianets.com"
 }

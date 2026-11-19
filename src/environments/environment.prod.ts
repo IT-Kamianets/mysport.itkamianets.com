@@ -9,7 +9,7 @@ export const environment: {
 	apiUrl: 'https://it.webart.work',
 	appVersion: '1.0.0',
 	production: true,
-	companyId: 'demo',
+	companyId: 'mysport',
 	defaultLanguage: 'ua',
 	languages: [
 		{
@@ -30,12 +30,3 @@ export const environment: {
 		},
 	],
 };
-
-export interface AppLanguage {
-	code: string;
-	name: string;
-	nativeName: string;
-	flagSrc: string;
-	htmlLang: string;
-	population: number;
-}
